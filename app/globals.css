@@ -1,26 +1,390 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================
+   THEME TOKENS (Light Mode default)
+   ============================================ */
+@theme {
+  /* Fonts */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  /* Accent color (mudah diubah) */
+  --color-accent-50: #eef2ff;
+  --color-accent-100: #e0e7ff;
+  --color-accent-200: #c7d2fe;
+  --color-accent-300: #a5b4fc;
+  --color-accent-400: #818cf8;
+  --color-accent-500: #6366f1;
+  --color-accent-600: #4f46e5;
+  --color-accent-700: #4338ca;
+  --color-accent-800: #3730a3;
+  --color-accent-900: #312e81;
+
+  /* Secondary accent (untuk gradient) */
+  --color-accent-2-400: #22d3ee;
+  --color-accent-2-500: #06b6d4;
+  --color-accent-2-600: #0891b2;
+
+  /* Animasi kustom */
+  --animate-gradient: gradient-shift 12s ease infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+/* ============================================
+   LIGHT MODE — Semantic tokens
+   ============================================ */
+:root {
+  --background: #fafafa;
+  --foreground: #171717;
+  --secondary: #737373;
+  --muted: #a3a3a3;
+  --border: #e5e5e5;
+  --card: #ffffff;
+  --card-border: #e5e5e5;
+  --glass: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.4);
+
+  color-scheme: light;
+}
+
+/* ============================================
+   DARK MODE — Semantic tokens
+   ============================================ */
+.dark {
+  --background: #09090b;
+  --foreground: #fafafa;
+  --secondary: #a1a1aa;
+  --muted: #71717a;
+  --border: #27272a;
+  --card: #111113;
+  --card-border: #27272a;
+  --glass: rgba(24, 24, 27, 0.6);
+  --glass-border: rgba(63, 63, 70, 0.4);
+
+  color-scheme: dark;
+}
+
+/* Daftarkan semantic tokens ke Tailwind agar bisa dipakai
+   sebagai utility: bg-background, text-foreground, border-border, dll. */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-secondary: var(--secondary);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --color-card-border: var(--card-border);
+  --color-glass: var(--glass);
+  --color-glass-border: var(--glass-border);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================
+   BASE STYLES
+   ============================================ */
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* offset untuk fixed navbar */
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  font-feature-settings: "rlig" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-accent-500);
+  color: white;
+}
+
+/* Scrollbar minimalis */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+/* Focus ring aksesibel */
+:focus-visible {
+  outline: 2px solid var(--color-accent-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.text-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-accent-600),
+    var(--color-accent-2-500)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid var(--glass-border);
+}
+
+/* ============================================
+   PREFERS-REDUCED-MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ============================================
+   SCROLL PROGRESS BAR (global)
+   ============================================ */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 100;
+  background: linear-gradient(
+    90deg,
+    var(--color-accent-500),
+    var(--color-accent-2-500)
+  );
+  transform-origin: 0%;
+}
+
+/* ============================================
+   TEXT GRADIENT VARIANTS
+   ============================================ */
+.text-gradient-accent {
+  background: linear-gradient(
+    135deg,
+    var(--color-accent-500),
+    var(--color-accent-2-500)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-subtle {
+  background: linear-gradient(
+    180deg,
+    var(--foreground) 0%,
+    var(--secondary) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ============================================
+   GLOW UTILITIES
+   ============================================ */
+.glow-accent {
+  box-shadow:
+    0 0 20px -5px var(--color-accent-500),
+    0 0 40px -10px var(--color-accent-500);
+}
+
+.glow-accent-sm {
+  box-shadow: 0 0 12px -3px var(--color-accent-500);
+}
+
+/* ============================================
+   BORDER GRADIENT (menggunakan mask)
+   ============================================ */
+.border-gradient {
+  position: relative;
+}
+.border-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    var(--color-accent-500),
+    var(--color-accent-2-500)
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+.border-gradient:hover::before {
+  opacity: 1;
+}
+
+/* ============================================
+   NOISE TEXTURE (subtle, untuk background)
+   ============================================ */
+.noise-bg {
+  position: relative;
+}
+.noise-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ============================================
+   MARQUEE ANIMATION (untuk tech stack, nanti)
+   ============================================ */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* ============================================
+   SHIMMER (untuk loading/skeleton)
+   ============================================ */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+/* ============================================
+   CUSTOM UTILITIES UNTUK TAILWIND V4
+   ============================================ */
+@utility text-balance {
+  text-wrap: balance;
+}
+@utility text-pretty {
+  text-wrap: pretty;
+}
+
+/* ============================================
+   DARK MODE OVERRIDES UNTUK SCROLLBAR
+   ============================================ */
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--border);
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+/* ============================================
+   SELECTION DI DARK MODE
+   ============================================ */
+.dark ::selection {
+  background-color: var(--color-accent-600);
+  color: white;
+}
+
+/* ============================================
+   SMOOTH THEME TRANSITION
+   ============================================ */
+html:not([data-theme-transitioning]) * {
+  transition: none;
+}
+
+html[data-theme-transitioning] body,
+html[data-theme-transitioning] * {
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* ============================================
+   LINK UNDERLINE ANIMATION
+   ============================================ */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ============================================
+   SECTION GLOW DIVIDER
+   ============================================ */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--border) 20%,
+    var(--border) 80%,
+    transparent
+  );
 }
