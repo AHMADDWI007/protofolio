@@ -4,10 +4,14 @@ import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { FadeIn } from "@/components/animations/FadeIn";
-import { StaggerContainer, staggerItem } from "@/components/animations/StaggerContainer";
+import {
+  StaggerContainer,
+  staggerItem,
+} from "@/components/animations/StaggerContainer";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { skillCategories, skillLevels } from "@/data/skills";
+import { getTechIcon, getTechColor } from "@/components/icons/TechIcons";
 import type { Skill } from "@/types";
 
 export function Skills() {
@@ -102,21 +106,74 @@ function SkillCategoryCard({
         </div>
 
         {/* Skills list */}
-        <ul className="flex flex-col gap-2.5">
+        <ul className="flex flex-col gap-3">
           {skills.map((skill) => (
-            <li
-              key={skill.name}
-              className="group/skill flex items-center justify-between gap-3"
-            >
-              <span className="text-sm text-secondary transition-colors group-hover/skill:text-foreground">
-                {skill.name}
-              </span>
-              <LevelIndicator level={skillLevels[skill.level]} />
-            </li>
+            <SkillItem key={skill.name} skill={skill} />
           ))}
         </ul>
       </div>
     </Card>
+  );
+}
+
+/* ================= SKILL ITEM ================= */
+function SkillItem({ skill }: { skill: Skill }) {
+  const TechIcon = getTechIcon(skill.name);
+  const techColor = getTechColor(skill.name);
+  const levelValue = skillLevels[skill.level];
+
+  return (
+    <li
+      className="group/skill flex items-center justify-between gap-3"
+      style={
+        techColor
+          ? ({ "--tech-color": techColor } as React.CSSProperties)
+          : undefined
+      }
+    >
+      <div className="flex min-w-0 items-center gap-2.5">
+        {/* Tech Icon */}
+        <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-foreground/5 transition-colors duration-300 group-hover/skill:bg-foreground/10">
+          {TechIcon ? (
+            <TechIcon
+              className={cn(
+                "h-3.5 w-3.5 text-foreground/70 transition-all duration-300",
+                "group-hover/skill:scale-110",
+                techColor
+                  ? "group-hover/skill:text-[var(--tech-color)]"
+                  : "group-hover/skill:text-accent-500"
+              )}
+            />
+          ) : (
+            <div className="h-2 w-2 rounded-full bg-accent-500" />
+          )}
+        </div>
+
+        {/* Skill name */}
+        <span className="truncate text-sm text-secondary transition-colors group-hover/skill:text-foreground">
+          {skill.name}
+        </span>
+      </div>
+
+      {/* Level dots */}
+      <div
+        className="flex shrink-0 items-center gap-1"
+        role="img"
+        aria-label={`Level ${levelValue} dari 4`}
+      >
+        {[1, 2, 3, 4].map((i) => (
+          <span
+            key={i}
+            className={cn(
+              "h-1.5 w-1.5 rounded-full transition-all duration-300",
+              i <= levelValue
+                ? "bg-gradient-to-r from-accent-500 to-accent-2-500"
+                : "bg-border"
+            )}
+          />
+        ))}
+      </div>
+    </li>
   );
 }
 

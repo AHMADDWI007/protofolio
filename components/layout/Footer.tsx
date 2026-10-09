@@ -46,7 +46,7 @@ export function Footer() {
               </span>
             </div>
             <p className="max-w-xs text-sm text-secondary">
-              Fresh Graduate D3 TI Politala — Full Stack Developer dengan IPK{" "}
+              Fresh Graduate D3 Teknologi Informasi — Full Stack Developer dengan IPK{" "}
               {personal.education.gpa}/{personal.education.gpaMax}.
             </p>
           </div>

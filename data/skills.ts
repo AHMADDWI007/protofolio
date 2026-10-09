@@ -1,28 +1,27 @@
 import type { SkillCategory } from "@/types";
-import { Code2, Database, Server, Wrench } from "lucide-react";
+import { Code2, Database, Smartphone, Wrench } from "lucide-react";
 
 export const skillCategories: SkillCategory[] = [
   {
-    title: "Frontend",
+    title: "Programming",
     icon: Code2,
     skills: [
-      { name: "HTML", level: "Advanced" },
-      { name: "CSS", level: "Advanced" },
+      { name: "Java", level: "Advanced" },
+      { name: "Dart", level: "Intermediate" },
+      { name: "PHP", level: "Advanced" },
       { name: "JavaScript", level: "Advanced" },
-      { name: "TypeScript", level: "Intermediate" },
-      { name: "React", level: "Intermediate" },
-      { name: "Next.js", level: "Intermediate" },
-      { name: "Tailwind CSS", level: "Advanced" },
     ],
   },
   {
-    title: "Backend",
-    icon: Server,
+    title: "Web & Mobile",
+    icon: Smartphone,
     skills: [
-      { name: "Node.js", level: "Intermediate" },
-      { name: "Express", level: "Intermediate" },
-      { name: "Laravel", level: "Intermediate" },
-      { name: "REST API", level: "Intermediate" },
+      { name: "Laravel", level: "Advanced" },
+      { name: "HTML", level: "Advanced" },
+      { name: "CSS", level: "Advanced" },
+      { name: "REST API", level: "Advanced" },
+      { name: "Android (Java)", level: "Intermediate" },
+      { name: "Flutter", level: "Intermediate" },
     ],
   },
   {
@@ -30,10 +29,8 @@ export const skillCategories: SkillCategory[] = [
     icon: Database,
     skills: [
       { name: "MySQL", level: "Advanced" },
-      { name: "PostgreSQL", level: "Intermediate" },
       { name: "Firebase", level: "Intermediate" },
       { name: "Firestore", level: "Intermediate" },
-      { name: "MongoDB", level: "Beginner" },
     ],
   },
   {
@@ -43,9 +40,7 @@ export const skillCategories: SkillCategory[] = [
       { name: "Git", level: "Advanced" },
       { name: "GitHub", level: "Advanced" },
       { name: "VS Code", level: "Advanced" },
-      { name: "Figma", level: "Intermediate" },
-      { name: "Postman", level: "Intermediate" },
-      { name: "Vercel", level: "Intermediate" },
+      { name: "Android Studio", level: "Intermediate" },
     ],
   },
 ];

@@ -1,6 +1,6 @@
 import type { NavItem, SocialLink } from "@/types";
 import { GithubIcon, LinkedinIcon } from "@/components/icons/BrandIcons";
-import { Mail } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 
 export const navItems: NavItem[] = [
   { label: "Beranda", href: "#beranda", id: "beranda" },
@@ -26,5 +26,10 @@ export const socialLinks: SocialLink[] = [
     label: "Email",
     href: "mailto:dwikurnianew@gmail.com",
     icon: Mail,
+  },
+  {
+    label: "WhatsApp",
+    href: "https://wa.me/6285607423287",
+    icon: Phone,
   },
 ];

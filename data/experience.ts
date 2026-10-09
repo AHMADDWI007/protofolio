@@ -3,43 +3,30 @@ import type { Experience } from "@/types";
 export const experiences: Experience[] = [
   {
     id: "exp-1",
-    period: "2025 — Sekarang",
-    duration: "Sedang berjalan",
-    position: "Frontend Developer",
-    company: "[NAMA PERUSAHAAN 1]",
+    period: "Oktober 2025 — Maret 2026",
+    duration: "6 bulan",
+    position: "Karyawan Magang (PKL)",
+    company: "PT Nusantara Batulicin",
     description:
-      "Mengembangkan dan memelihara dashboard internal menggunakan React dan Next.js. Berkolaborasi dengan tim desain untuk mengimplementasikan UI/UX yang konsisten, serta mengoptimalkan performa aplikasi dengan Code Splitting dan Lazy Loading.",
-    technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
-    current: true,
+      "Mengembangkan Sistem Informasi Pengolahan Bokar dan Produksi SIR-20 berbasis web dan mobile untuk mendukung operasional perusahaan. Menganalisis kebutuhan pengguna, merancang alur sistem, mengembangkan dan mengintegrasikan database, serta melakukan pengujian, troubleshooting, dan optimalisasi sistem.",
+    technologies: [
+      "Laravel",
+      "Flutter",
+      "MySQL",
+      "REST API",
+      "Firebase",
+    ],
+    current: false,
   },
   {
     id: "exp-2",
-    period: "2024 — 2025",
-    duration: "12 bulan",
-    position: "Full Stack Developer",
-    company: "[NAMA PERUSAHAAN 2]",
+    period: "Januari 2024 — September 2024",
+    duration: "9 bulan",
+    position: "Anggota Divisi Badminton",
+    company: "Spora Politala",
     description:
-      "Membangun REST API menggunakan Node.js dan Express untuk aplikasi mobile. Mengintegrasikan payment gateway, authentication, dan real-time notification menggunakan Firebase Cloud Messaging.",
-    technologies: ["Node.js", "Express", "MongoDB", "Firebase"],
-  },
-  {
-    id: "exp-3",
-    period: "2023 — 2024",
-    duration: "10 bulan",
-    position: "Web Developer",
-    company: "[NAMA PERUSAHAAN 3]",
-    description:
-      "Mengembangkan company profile dan landing page untuk berbagai klien. Fokus pada responsive design, SEO optimization, dan integrasi CMS untuk memudahkan update konten.",
-    technologies: ["Laravel", "MySQL", "Bootstrap", "jQuery"],
-  },
-  {
-    id: "exp-4",
-    period: "2022 — 2023",
-    duration: "8 bulan",
-    position: "Junior Developer",
-    company: "[NAMA PERUSAHAAN 4]",
-    description:
-      "Memulai karir sebagai junior developer, mengerjakan berbagai project internal mulai dari bug fixing, feature enhancement, hingga maintenance sistem legacy.",
-    technologies: ["PHP", "JavaScript", "MySQL", "Git"],
+      "Berpartisipasi dalam perencanaan dan pelaksanaan kegiatan badminton sebagai bagian dari program kerja organisasi. Berkolaborasi dengan anggota dan pengurus dalam pelaksanaan kegiatan serta mengembangkan kemampuan komunikasi dan kerja sama tim.",
+    technologies: ["Komunikasi", "Kerja Tim", "Manajemen Kegiatan"],
+    current: false,
   },
 ];
